@@ -1,8 +1,31 @@
+env:
+  global:
+    - VERSION=1.${TRAVIS_BUILD_NUMBER}
+    - IMAGE_NAME=dockerrepository/pgbouncer
+  matrix:
+    - PGB_BRANCH=pgbouncer_1_7_2
+      IMAGE_VERSION=1.7.2
+      DOCKERFILE=Dockerfile
+    - PGB_BRANCH=pgbouncer_1_8_1
+      IMAGE_VERSION=1.8.1
+      DOCKERFILE=Dockerfile
+      LATEST_VERSION=yes
+
 sudo: required
 
 services:
   - docker
 
 script:
-  - docker build --build-arg PGB_BRANCH=pgbouncer_1_7_2 --pull --tag dockerrepository/pgbouncer:1.7.2 .
-  - docker build --build-arg PGB_BRANCH=pgbouncer_1_8_1 --pull --tag dockerrepository/pgbouncer:1.8.1 .
+  - docker build --build-arg PGB_BRANCH=$PGB_BRANCH --pull --tag $IMAGE_NAME:$IMAGE_VERSION .
+
+deploy:
+  provider: script
+  script: bash docker_push.sh
+  on:
+    branch:
+      - master
+      - test_travis
+
+notifications:
+  email: false
