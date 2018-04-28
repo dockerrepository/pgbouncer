@@ -1,5 +1,7 @@
 # PgBouncer
 [![Build Status](https://travis-ci.org/dockerrepository/pgbouncer.svg?branch=master)](https://travis-ci.org/dockerrepository/pgbouncer)
+[![](https://images.microbadger.com/badges/version/dockerrepository/pgbouncer.svg)](https://microbadger.com/images/dockerrepository/pgbouncer "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/dockerrepository/pgbouncer.svg)](https://microbadger.com/images/dockerrepository/pgbouncer "Get your own image badge on microbadger.com")
 
 PgBouncer is a lightweight connection pooler for PostgreSQL.
 Docker repository for [PgBouncer](https://pgbouncer.github.io) with latest releases.
@@ -9,6 +11,7 @@ Docker repository for [PgBouncer](https://pgbouncer.github.io) with latest relea
     $ docker pull dockerrepository/pgbouncer:latest
 
 # Usage Examples
+
 PgBouncer can run using Environment variables or volume with `pgbouncer.ini`
 
 ## Using environment variables
@@ -19,7 +22,7 @@ PgBouncer can run using Environment variables or volume with `pgbouncer.ini`
     AUTH_FILE_CONTENT='"<db_user>" "<password db_user>"' \
     --name pgbouncer dockerrepository/pgbouncer:latest
 
-### Default variables values:
+#### Default variables values:
     
     PG_USER=postgres
     PGB_LOG=/var/log/pgbouncer
@@ -33,7 +36,8 @@ PgBouncer can run using Environment variables or volume with `pgbouncer.ini`
 
 ## Using volumes
 
-    $ docker run -p 6432:6432 -v <dir-pgbouncer-ini>:/etc/pgbouncer \ --name pgbouncer dockerrepository/pgbouncer:latest
+    $ docker run -p 6432:6432 -v <dir-pgbouncer-config>:/etc/pgbouncer \ 
+    --name pgbouncer dockerrepository/pgbouncer:latest
     
 ## Test Connection
 
