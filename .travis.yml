@@ -4,4 +4,5 @@ services:
   - docker
 
 script:
-  - docker build --pull --tag dockerrepository/pgbouncer:latest .
+  - docker build --build-arg PGB_BRANCH=pgbouncer_1_7_2 --pull --tag dockerrepository/pgbouncer:1.7.2 .
+  - docker build --build-arg PGB_BRANCH=pgbouncer_1_8_1 --pull --tag dockerrepository/pgbouncer:1.8.1 .

@@ -2,14 +2,14 @@ FROM alpine:latest AS build_stage
 
 MAINTAINER nielsonnas@gmail.com
 
-ARG PGB_BRANCH
+ARG PGB_BRANCH=pgbouncer_1_8_1
 
 RUN apk --update add git python py-pip build-base automake libtool m4 autoconf libevent-dev openssl-dev c-ares-dev
 RUN pip install docutils
 RUN ln -s /usr/bin/rst2man.py /bin/rst2man
 
 RUN git clone https://github.com/pgbouncer/pgbouncer.git /src/pgbouncer
-RUN cd /src/pgbouncer && git checkout ${PGB_BRANCH:-master}
+RUN cd /src/pgbouncer && git checkout $PGB_BRANCH
 
 WORKDIR /src/pgbouncer
 RUN mkdir /pgbouncer
